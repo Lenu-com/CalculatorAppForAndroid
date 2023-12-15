@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "to.msn.wings.calculator"
-    compileSdk = 34
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "to.msn.wings.calculator"
