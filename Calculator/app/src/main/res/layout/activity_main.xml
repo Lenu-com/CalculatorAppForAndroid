@@ -178,7 +178,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
             android:text="@string/four" />
@@ -192,7 +192,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
             android:text="@string/five" />
@@ -206,7 +206,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
             android:text="@string/six" />
@@ -220,7 +220,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/orange"
             android:text="@string/subtract" />
@@ -246,7 +246,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
             android:text="@string/one" />
@@ -260,7 +260,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
             android:text="@string/two" />
@@ -274,7 +274,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
             android:text="@string/three" />
@@ -288,7 +288,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/orange"
             android:text="@string/add" />
@@ -315,7 +315,7 @@
             android:layout_width="160dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
             android:text="@string/zero" />
@@ -329,7 +329,7 @@
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
             android:text="@string/dot" />
@@ -343,7 +343,7 @@
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/orange"
             android:text="@string/equals" />
