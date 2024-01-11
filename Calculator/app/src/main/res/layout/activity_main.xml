@@ -19,7 +19,7 @@
         android:layout_height="200dp"
         android:layout_gravity="center"
         android:gravity="end|bottom"
-        android:textSize="50dp"
+        android:textSize="50sp"
         android:text="@string/default_result"
         android:textColor="@color/white" />
 
@@ -59,7 +59,7 @@
             android:backgroundTint="@color/lightGray"
             android:text="@string/sign"
             android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
         <Space
             android:layout_width="10dp"
@@ -70,7 +70,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/black"
             android:backgroundTint="@color/lightGray"
             android:text="@string/percent" />
@@ -84,7 +84,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/orange"
             android:text="@string/divide" />
@@ -110,7 +110,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
             android:text="@string/seven" />
@@ -124,7 +124,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
             android:text="@string/eight" />
@@ -138,7 +138,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
             android:text="@string/nine" />
@@ -152,7 +152,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/orange"
             android:text="@string/multiply" />
