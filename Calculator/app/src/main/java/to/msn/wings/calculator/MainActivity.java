@@ -12,7 +12,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    /* 数字ボタンの数を定義 */
     private static final int NUMBER_BUTTON_TOTAL = 9;
+
+    /* 同一フォントサイズの桁を定義 */
+    private static final int MAX_DIGIT = 6;
+
     private TextView textView;
 
     @Override
@@ -120,5 +126,16 @@ public class MainActivity extends AppCompatActivity {
 
         /* 表示内容更新 */
         textView.setText(currentText);
+
+        /* 表示桁数が6桁を超えた場合、フォントサイズを小さくする */
+        if (currentText.length() > MAX_DIGITS) {
+            float scale = (foloat) MAX_DIGITS / currentText.length();
+            textVie.setScaleX(scale);
+            textVie.setScaleY(scale);
+        } else {
+            /* 元のサイズに戻す */
+            textVie.setScaleX(1);
+            textVie.setScaleY(1);
+        }
     }
 }
