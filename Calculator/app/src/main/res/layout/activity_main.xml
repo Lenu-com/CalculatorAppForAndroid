@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
+    android:background="@color/black"
     >
 
 
@@ -18,9 +19,10 @@
         android:layout_width="380dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
-        android:gravity="right|bottom"
-        android:textSize="50dp"
-        android:text="0" />
+        android:gravity="end|bottom"
+        android:textSize="50sp"
+        android:textColor="@color/white"
+        android:text="@string/zero" />
 
     <Space
         android:layout_width="match_parent"
@@ -44,7 +46,7 @@
             android:textSize="25sp"
             android:textColor="@color/black"
             android:backgroundTint="@color/lightGray"
-            android:text="AC" />
+            android:text="@string/all_clear" />
 
         <Space
             android:layout_width="10dp"
@@ -56,9 +58,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@color/lightGray"
-            android:text="+/-"
+            android:text="@string/sign"
             android:textColor="#000000"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
         <Space
             android:layout_width="10dp"
@@ -69,10 +71,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="#000000"
             android:backgroundTint="@color/lightGray"
-            android:text="%" />
+            android:text="@string/percent" />
 
         <Space
             android:layout_width="10dp"
@@ -83,10 +85,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="#FFA500"
-            android:text="÷" />
+            android:text="@string/division" />
 
         <Space
             android:layout_width="10dp"
@@ -109,10 +111,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
-            android:text="7" />
+            android:text="@string/seven" />
 
         <Space
             android:layout_width="10dp"
@@ -123,10 +125,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
-            android:text="8" />
+            android:text="@string/eight" />
 
         <Space
             android:layout_width="10dp"
@@ -137,10 +139,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
-            android:text="9" />
+            android:text="@string/nine" />
 
         <Space
             android:layout_width="10dp"
@@ -151,10 +153,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="#FFA500"
-            android:text="×" />
+            android:text="@string/multiplication" />
 
         <Space
             android:layout_width="10dp"
@@ -177,10 +179,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
-            android:text="4" />
+            android:text="@string/four" />
 
         <Space
             android:layout_width="10dp"
@@ -191,10 +193,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
-            android:text="5" />
+            android:text="@string/five" />
 
         <Space
             android:layout_width="10dp"
@@ -205,10 +207,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
-            android:text="6" />
+            android:text="@string/six" />
 
         <Space
             android:layout_width="10dp"
@@ -219,10 +221,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="#FFA500"
-            android:text="-" />
+            android:text="@string/subtraction" />
 
         <Space
             android:layout_width="10dp"
@@ -245,10 +247,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
-            android:text="1" />
+            android:text="@string/one" />
 
         <Space
             android:layout_width="10dp"
@@ -259,10 +261,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
-            android:text="2" />
+            android:text="@string/two" />
 
         <Space
             android:layout_width="10dp"
@@ -273,10 +275,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
-            android:text="3" />
+            android:text="@string/three" />
 
         <Space
             android:layout_width="10dp"
@@ -287,10 +289,10 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="#FFA500"
-            android:text="+" />
+            android:text="@string/addition" />
 
         <Space
             android:layout_width="10dp"
@@ -314,10 +316,10 @@
             android:layout_width="160dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
-            android:text="0" />
+            android:text="@string/zero" />
 
         <Space
             android:layout_width="10dp"
@@ -328,10 +330,10 @@
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/darkGray"
-            android:text="." />
+            android:text="@string/dot" />
 
         <Space
             android:layout_width="10dp"
@@ -342,10 +344,10 @@
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:backgroundTint="#FFA500"
-            android:text="=" />
+            android:text="@string/equals" />
 
         <Space
             android:layout_width="10dp"
