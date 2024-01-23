@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int NUMBER_BUTTON_TOTAL = 9;
     private TextView textView;
 
     @Override
