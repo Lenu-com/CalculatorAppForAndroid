@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
 
         View.OnClickListener allClearClickListener = view -> {
-            /* TODO: ACボタンが押された時の処理を実装 */
+            allClear();
         };
 
         View.OnClickListener clearClickListener = view -> {
@@ -134,5 +134,10 @@ public class MainActivity extends AppCompatActivity {
             textView.setScaleX(1);
             textView.setScaleY(1);
         }
+    }
+
+
+    private void allClear() {
+        textView.setText("0");
     }
 }
