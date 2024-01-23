@@ -1,8 +1,6 @@
 package to.msn.wings.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.WindowDecorActionBar;
-import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
 import android.os.Bundle;
 
@@ -17,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int MAX_DIGIT = 6;
 
     private TextView textView;
+    private double storedNumber = 0;
+    private String currentOperator = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,28 +26,45 @@ public class MainActivity extends AppCompatActivity {
         /* テキストビューオブジェクトを取得 */
         textView = findViewById(R.id.textView);
 
-        View.OnClickListener allClearClickListener = view -> {
-            allClear();
-        };
+        View.OnClickListener allClearClickListener = view -> allClear();
 
         View.OnClickListener clearClickListener = view -> {
             /* TODO: Cボタンが押された時の処理を実装 */
         };
 
-        View.OnClickListener signClickListener = view -> {
-            /* TODO: +/-ボタンが押された時の処理を実装 */
-        };
+        View.OnClickListener signClickListener = view -> changeSign();
 
-        View.OnClickListener percentClickListener = view -> {
-            /* TODO: %ボタンが押された時の処理を実装 */
-        };
+        View.OnClickListener percentClickListener = view -> convertToPercentage();
 
-        View.OnClickListener dotClickListener = view -> {
-            /* TODO: .ボタンが押された時の処理を実装 */
-        };
+        View.OnClickListener dotClickListener = view -> appendDecimalPointIfAbsent();
 
         View.OnClickListener equalClickListener = view -> {
-            /* TODO: =ボタンが押された時の処理を実装 */
+            if (currentOperator == null) {
+                return;
+            }
+            double currentNumber = Double.parseDouble(textView.getText().toString());
+            double result = 0;
+
+            switch (currentOperator) {
+                case "+":
+                    result = storedNumber + currentNumber;
+                    break;
+                case "-":
+                    result = storedNumber - currentNumber;
+                    break;
+                case "×":
+                    result = storedNumber * currentNumber;
+                    break;
+                case "÷":
+                    if (currentNumber == 0) {
+                        textView.setText("エラー");
+                        return;
+                    }
+                    result = storedNumber / currentNumber;
+                    break;
+            }
+            convertDecimalToIntIfApplicable(String.valueOf(result));
+            currentOperator = null;
         };
 
         /* ボタンオブジェクトを取得 */
@@ -55,12 +72,14 @@ public class MainActivity extends AppCompatActivity {
         setupNumberButtons();
         Button btn_AC = findViewById(R.id.btn_AC);
         Button btn_PM = findViewById(R.id.btn_PM);
+        Button btn_per = findViewById(R.id.btn_per);
         Button btn_dot = findViewById(R.id.btn_dot);
         Button btn_equ = findViewById(R.id.btn_equ);
 
         /* ボタンにリスナーを設定 */
         btn_AC.setOnClickListener(allClearClickListener);
         btn_PM.setOnClickListener(signClickListener);
+        btn_per.setOnClickListener(percentClickListener);
         btn_dot.setOnClickListener(dotClickListener);
         btn_equ.setOnClickListener(equalClickListener);
     }
@@ -105,8 +124,12 @@ public class MainActivity extends AppCompatActivity {
         };
 
         View.OnClickListener operatorClickListener = view -> {
-            /* TODO: 演算子ボタンが押された時の処理を実装
-              (前述のように演算子毎にクリックリスナーを定義するのもあり) */
+            if (currentOperator != null) {
+                return;
+            }
+            currentOperator = ((Button) view).getText().toString();
+            storedNumber = Double.parseDouble(textView.getText().toString());
+            textView.setText("0");
         };
 
         for (int id : operatorButtonIds) {
@@ -139,5 +162,35 @@ public class MainActivity extends AppCompatActivity {
 
     private void allClear() {
         textView.setText("0");
+    }
+
+    private void appendDecimalPointIfAbsent() {
+        String currentText = textView.getText().toString();
+        if (currentText.contains(".")) {
+            return;
+        }
+        appendToDisplay(".");
+    }
+
+    private void convertDecimalToIntIfApplicable(String text) {
+        double result = Double.parseDouble(text);
+        if (result == Math.floor(result)) {
+            textView.setText(String.valueOf((int)result));
+            return;
+        }
+        textView.setText(String.valueOf(result));
+    }
+
+
+    private void convertToPercentage() {
+        double result = Double.parseDouble(textView.getText().toString());
+        result /= 100;
+        convertDecimalToIntIfApplicable(String.valueOf(result));
+    }
+
+    private void changeSign() {
+        double result = Double.parseDouble(textView.getText().toString());
+        result *= -1;
+        convertDecimalToIntIfApplicable(String.valueOf(result));
     }
 }
