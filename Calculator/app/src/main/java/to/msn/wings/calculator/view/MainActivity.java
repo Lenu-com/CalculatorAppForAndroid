@@ -1,7 +1,7 @@
 package to.msn.wings.calculator.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import to.msn.wings.calculator.viewmodel.CalculatorController;
 import android.os.Bundle;
 
 import android.text.Editable;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import to.msn.wings.calculator.R;
 
 public class MainActivity extends AppCompatActivity {
+    private CalculatorController calculatorController = new CalculatorController();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,21 +87,22 @@ public class MainActivity extends AppCompatActivity {
 
         for (Button button : operatorButtons) {
             button.setOnClickListener(view -> {
-                /* TODO: 四則演算ボタンが押された際の共通処理を実装する */
+                calculatorController.setStoredNumber(Integer.parseInt(textView.getText().toString()));
+
                 if (button.getId() == R.id.btn_div) {
-                    /* TODO: ÷ボタンが押された際の処理を実装する */
+                    calculatorController.setCurrentOperator(CalculatorController.Operator.DIVIDE);
                 }
 
                 if (button.getId() == R.id.btn_mul) {
-                    /* TODO: ×ボタンが押された際の処理を実装する */
+                    calculatorController.setCurrentOperator(CalculatorController.Operator.MULTIPLY);
                 }
 
                 if (button.getId() == R.id.btn_sub) {
-                    /* TODO: -ボタンが押された際の処理を実装する */
+                    calculatorController.setCurrentOperator(CalculatorController.Operator.SUBTRACT);
                 }
 
                 if (button.getId() == R.id.btn_add) {
-                    /* TODO: +ボタンが押された際の処理を実装する */
+                    calculatorController.setCurrentOperator(CalculatorController.Operator.ADD);
                 }
             });
         }
