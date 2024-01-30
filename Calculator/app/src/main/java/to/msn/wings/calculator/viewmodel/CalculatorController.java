@@ -1,8 +1,8 @@
 package to.msn.wings.calculator.viewmodel;
 
 public class CalculatorController {
-    private int currentNumber;
-    private int storedNumber;
+    private double currentNumber;
+    private double storedNumber;
     private Operator currentOperator;
 
     public enum Operator {
@@ -18,11 +18,11 @@ public class CalculatorController {
         this.storedNumber = 0;
     }
 
-    public void setCurrentNumber(int number) {
+    public void setCurrentNumber(double number) {
         this.currentNumber = number;
     }
 
-    public void setStoredNumber(int number) {
+    public void setStoredNumber(double number) {
         this.storedNumber = number;
     }
 
@@ -30,7 +30,7 @@ public class CalculatorController {
         this.currentOperator = operator;
     }
 
-    public int calculate() {
+    public double calculate() {
         switch (this.currentOperator) {
             case DIVIDE:
                 storedNumber = to.msn.wings.calculator.model.CalculatorLogic.divide(storedNumber, currentNumber);

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import to.msn.wings.calculator.R;
 
 public class MainActivity extends AppCompatActivity {
-    private CalculatorController calculatorController = new CalculatorController();
+    final private CalculatorController calculatorController = new CalculatorController();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                /* TODO: 桁数が増えた際の処理を実装する */
+            }
+
+            public void onTextChanged(CharSequence s, double start, double before, double count) {
                 /* TODO: 桁数が増えた際の処理を実装する */
             }
         });
@@ -112,5 +116,20 @@ public class MainActivity extends AppCompatActivity {
                 /* TODO: 数字ボタンが押された際の共通処理を実装する */
             });
         }
+    }
+
+    private void updateTextView(String text) {
+        TextView textView = findViewById(R.id.textView);
+        textView.setText(text);
+    }
+
+    private void updateTextView(double number) {
+        TextView textView = findViewById(R.id.textView);
+        textView.setText(String.valueOf(number));
+    }
+
+    private void updateTextView(int number) {
+        TextView textView = findViewById(R.id.textView);
+        textView.setText(String.valueOf(number));
     }
 }
