@@ -1,22 +1,27 @@
 package to.msn.wings.calculator.model;
 
 public class CalculatorLogic {
-    public static double divide(double a, double b) {
-        if (b == 0) {
-            throw new IllegalArgumentException("0で割ることはできません");
-        }
-        return a / b;
+    public double toggleSign(double currentNumber) {
+        return currentNumber * -1;
     }
 
-    public static double multiply(double a, double b) {
-        return a * b;
+    public double percent(double currentNumber) {
+        return currentNumber / 100;
     }
 
-    public static double subtract(double a, double b) {
-        return a - b;
+    public double divide(double currentNumber, double storedNumber) {
+        return storedNumber / currentNumber;
     }
 
-    public static double add(double a, double b) {
-        return a + b;
+    public double multiply(double currentNumber, double storedNumber) {
+        return storedNumber * currentNumber;
+    }
+
+    public double subtract(double currentNumber, double storedNumber) {
+        return storedNumber - currentNumber;
+    }
+
+    public double add(double currentNumber, double storedNumber) {
+        return storedNumber + currentNumber;
     }
 }

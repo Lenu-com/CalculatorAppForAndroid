@@ -1,11 +1,10 @@
 package to.msn.wings.calculator.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+
 import to.msn.wings.calculator.viewmodel.CalculatorController;
 import android.os.Bundle;
-
-import android.text.Editable;
-import android.text.TextWatcher;
 
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView textView = findViewById(R.id.textView);
-        Button btnAC = findViewById(R.id.btn_AC);
+        Button allClear = findViewById(R.id.btn_AC);
         Button sign = findViewById(R.id.btn_PM);
         Button percent = findViewById(R.id.btn_per);
         Button div = findViewById(R.id.btn_div);
@@ -48,88 +47,33 @@ public class MainActivity extends AppCompatActivity {
                 zero, one, two, three, four, five, six, seven, eight, nine
         };
 
-        textView.addTextChangedListener(new TextWatcher() {
+        calculatorController.getDisplayText().observe(this, new Observer<String>() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                /* 実装不要 */
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                /* 実装不要 */
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                /* TODO: 桁数が増えた際の処理を実装する */
-            }
-
-            public void onTextChanged(CharSequence s, double start, double before, double count) {
-                /* TODO: 桁数が増えた際の処理を実装する */
+            public void onChanged(String s) {
+                textView.setText(s);
             }
         });
-
-        btnAC.setOnClickListener(view -> {
-            /* TODO: ACボタンが押された際の処理を実装する */
-        });
-
-        sign.setOnClickListener(view -> {
-            /* TODO: ±ボタンが押された際の処理を実装する */
-        });
-
-        percent.setOnClickListener(view -> {
-            /* TODO: %ボタンが押された際の処理を実装する */
-        });
-
-        dot.setOnClickListener(view -> {
-            /* TODO: .ボタンが押された際の処理を実装する */
-        });
-
-        equals.setOnClickListener(view -> {
-            /* TODO: =ボタンが押された際の処理を実装する */
-        });
-
-        for (Button button : operatorButtons) {
-            button.setOnClickListener(view -> {
-                calculatorController.setStoredNumber(Integer.parseInt(textView.getText().toString()));
-
-                if (button.getId() == R.id.btn_div) {
-                    calculatorController.setCurrentOperator(CalculatorController.Operator.DIVIDE);
-                }
-
-                if (button.getId() == R.id.btn_mul) {
-                    calculatorController.setCurrentOperator(CalculatorController.Operator.MULTIPLY);
-                }
-
-                if (button.getId() == R.id.btn_sub) {
-                    calculatorController.setCurrentOperator(CalculatorController.Operator.SUBTRACT);
-                }
-
-                if (button.getId() == R.id.btn_add) {
-                    calculatorController.setCurrentOperator(CalculatorController.Operator.ADD);
-                }
-            });
-        }
 
         for (Button button : numberButtons) {
-            button.setOnClickListener(view -> {
-                /* TODO: 数字ボタンが押された際の共通処理を実装する */
+            button.setOnClickListener(v -> {
+                calculatorController.onNumberButtonClicked(button.getText().toString());
             });
         }
-    }
 
-    private void updateTextView(String text) {
-        TextView textView = findViewById(R.id.textView);
-        textView.setText(text);
-    }
+        allClear.setOnClickListener(v -> {
+            calculatorController.onAllClearButtonClicked();
+        });
 
-    private void updateTextView(double number) {
-        TextView textView = findViewById(R.id.textView);
-        textView.setText(String.valueOf(number));
-    }
+        sign.setOnClickListener(v -> {
+            calculatorController.onSignButtonClicked();
+        });
 
-    private void updateTextView(int number) {
-        TextView textView = findViewById(R.id.textView);
-        textView.setText(String.valueOf(number));
+        percent.setOnClickListener(v -> {
+            calculatorController.onPercentButtonClicked();
+        });
+
+        dot.setOnClickListener(v -> {
+            calculatorController.onDotButtonClicked();
+        });
     }
 }

@@ -1,11 +1,12 @@
 package to.msn.wings.calculator.viewmodel;
 
-public class CalculatorController {
-    private double currentNumber;
-    private double storedNumber;
-    private Operator currentOperator;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
-    public enum Operator {
+import to.msn.wings.calculator.model.CalculatorLogic;
+
+public class CalculatorController {
+    private enum Operator {
         DIVIDE,
         MULTIPLY,
         SUBTRACT,
@@ -13,41 +14,62 @@ public class CalculatorController {
         NONE
     }
 
-    public CalculatorController() {
-        this.currentNumber = 0;
-        this.storedNumber = 0;
+    private final CalculatorLogic calculatorLogic = new CalculatorLogic();
+    private final MutableLiveData<String> displayText = new MutableLiveData<>();
+
+    public LiveData<String> getDisplayText() {
+        return displayText;
     }
 
-    public void setCurrentNumber(double number) {
-        this.currentNumber = number;
-    }
-
-    public void setStoredNumber(double number) {
-        this.storedNumber = number;
-    }
-
-    public void setCurrentOperator(Operator operator) {
-        this.currentOperator = operator;
-    }
-
-    public double calculate() {
-        switch (this.currentOperator) {
-            case DIVIDE:
-                storedNumber = to.msn.wings.calculator.model.CalculatorLogic.divide(storedNumber, currentNumber);
-                break;
-            case MULTIPLY:
-                storedNumber = to.msn.wings.calculator.model.CalculatorLogic.multiply(storedNumber, currentNumber);
-                break;
-            case SUBTRACT:
-                storedNumber = to.msn.wings.calculator.model.CalculatorLogic.subtract(storedNumber, currentNumber);
-                break;
-            case ADD:
-                storedNumber = to.msn.wings.calculator.model.CalculatorLogic.add(storedNumber, currentNumber);
-                break;
-            default:
-                break;
+    public void formatNumberForDisplay(double number) {
+        if (Math.floor(number) == number) {
+            displayText.setValue(String.valueOf((int) number));
+        } else {
+            displayText.setValue(String.valueOf(number));
         }
-        currentNumber = 0;
-        return currentNumber;
+    }
+
+    public void onAllClearButtonClicked() {
+        /* TODO: currentNumber. storedNumberの初期化処理を追加する */
+        displayText.setValue("0");
+    }
+
+    public void onNumberButtonClicked(String number) {
+        String currentText = displayText.getValue();
+        if (currentText == null) {
+            currentText = "0";
+        }
+        if (currentText.equals("0")) {
+            displayText.setValue(number);
+        } else {
+            displayText.setValue(currentText + number);
+        }
+    }
+
+    public void onSignButtonClicked() {
+        String currentText = displayText.getValue();
+        if (currentText == null) {
+            return;
+        }
+        double currentNumber = Double.parseDouble(currentText);
+        formatNumberForDisplay(calculatorLogic.toggleSign(currentNumber));
+    }
+
+    public void onPercentButtonClicked() {
+        String currentText = displayText.getValue();
+        if (currentText == null) {
+            return;
+        }
+        double currentNumber = Double.parseDouble(currentText);
+        formatNumberForDisplay(calculatorLogic.percent(currentNumber));
+    }
+
+    public void onDotButtonClicked() {
+        String currentText = displayText.getValue();
+        if (currentText == null) {
+            displayText.setValue("0.");
+        } else if (!currentText.contains(".")) {
+            displayText.setValue(currentText + ".");
+        }
     }
 }
