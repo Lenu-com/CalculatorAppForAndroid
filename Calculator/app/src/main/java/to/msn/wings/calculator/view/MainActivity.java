@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import to.msn.wings.calculator.viewmodel.CalculatorController;
+
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.widget.Button;
@@ -56,24 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
         for (Button button : numberButtons) {
             button.setOnClickListener(v -> {
-                calculatorController.onNumberButtonClicked(button.getText().toString());
+                String buttonText = ((Button) v).getText().toString();
+                calculatorController.onNumberButtonClicked(buttonText);
             });
         }
 
-        allClear.setOnClickListener(v -> {
-            calculatorController.onAllClearButtonClicked();
-        });
-
-        sign.setOnClickListener(v -> {
-            calculatorController.onSignButtonClicked();
-        });
-
-        percent.setOnClickListener(v -> {
-            calculatorController.onPercentButtonClicked();
-        });
-
-        dot.setOnClickListener(v -> {
-            calculatorController.onDotButtonClicked();
-        });
+        dot.setOnClickListener(v -> calculatorController.onDotButtonClicked());
+        sign.setOnClickListener(v -> calculatorController.onSignButtonClicked());
     }
 }

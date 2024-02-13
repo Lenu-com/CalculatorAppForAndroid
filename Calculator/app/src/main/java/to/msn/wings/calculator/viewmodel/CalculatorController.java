@@ -6,70 +6,93 @@ import androidx.lifecycle.MutableLiveData;
 import to.msn.wings.calculator.model.CalculatorLogic;
 
 public class CalculatorController {
-    private enum Operator {
-        DIVIDE,
-        MULTIPLY,
-        SUBTRACT,
-        ADD,
-        NONE
+    public enum Operator {
+        ADD, SUB, MUL, DIV, NONE
     }
-
-    private final CalculatorLogic calculatorLogic = new CalculatorLogic();
     private final MutableLiveData<String> displayText = new MutableLiveData<>();
+    private Operator selectedOperator = Operator.NONE;
+    private final CalculatorLogic calculatorLogic = new CalculatorLogic();
+
+    public CalculatorController() {
+        displayText.setValue("0");
+    }
 
     public LiveData<String> getDisplayText() {
         return displayText;
     }
 
-    public void formatNumberForDisplay(double number) {
+    private String formattedNumberText(double number) {
         if (Math.floor(number) == number) {
-            displayText.setValue(String.valueOf((int) number));
-        } else {
-            displayText.setValue(String.valueOf(number));
+            return String.valueOf((int) number);
         }
+        return String.valueOf(number);
     }
 
-    public void onAllClearButtonClicked() {
-        /* TODO: currentNumber. storedNumberの初期化処理を追加する */
-        displayText.setValue("0");
-    }
-
-    public void onNumberButtonClicked(String number) {
-        String currentText = displayText.getValue();
-        if (currentText == null) {
-            currentText = "0";
-        }
-        if (currentText.equals("0")) {
-            displayText.setValue(number);
-        } else {
-            displayText.setValue(currentText + number);
-        }
-    }
-
-    public void onSignButtonClicked() {
-        String currentText = displayText.getValue();
-        if (currentText == null) {
+    private void updateSelectedOperator(String operatorButtonText) {
+        if (operatorButtonText == null) {
             return;
         }
-        double currentNumber = Double.parseDouble(currentText);
-        formatNumberForDisplay(calculatorLogic.toggleSign(currentNumber));
+        switch (operatorButtonText) {
+            case "+":
+                selectedOperator = Operator.ADD;
+                break;
+            case "-":
+                selectedOperator = Operator.SUB;
+                break;
+            case "×":
+                selectedOperator = Operator.MUL;
+                break;
+            case "÷":
+                selectedOperator = Operator.DIV;
+                break;
+        }
     }
 
-    public void onPercentButtonClicked() {
-        String currentText = displayText.getValue();
-        if (currentText == null) {
+    private void updateDisplayTextWithNumber(String numberText) {
+        String currentDisplayText = displayText.getValue();
+        if (numberText == null || currentDisplayText == null) {
             return;
         }
-        double currentNumber = Double.parseDouble(currentText);
-        formatNumberForDisplay(calculatorLogic.percent(currentNumber));
+        if (numberText.equals("0") && currentDisplayText.equals("0")) {
+            return;
+        }
+        if (currentDisplayText.equals("0")) {
+            displayText.setValue(numberText);
+            return;
+        }
+        displayText.setValue(currentDisplayText + numberText);
+    }
+
+    private void appendDotToDisplayText() {
+        String currentDisplayText = displayText.getValue();
+        if (currentDisplayText == null) {
+            return;
+        }
+        if (currentDisplayText.contains(".")) {
+            return;
+        }
+        displayText.setValue(currentDisplayText + ".");
+    }
+
+    private void changeSignOfDisplayText() {
+        String currentDisplayText = displayText.getValue();
+        if (currentDisplayText == null) {
+            return;
+        }
+        double currentNumber = Double.parseDouble(currentDisplayText);
+        double signChangedNumber = calculatorLogic.toggleSign(currentNumber);
+        displayText.setValue(formattedNumberText(signChangedNumber));
+    }
+
+    public void onNumberButtonClicked(String numberButtonText) {
+        updateDisplayTextWithNumber(numberButtonText);
     }
 
     public void onDotButtonClicked() {
-        String currentText = displayText.getValue();
-        if (currentText == null) {
-            displayText.setValue("0.");
-        } else if (!currentText.contains(".")) {
-            displayText.setValue(currentText + ".");
-        }
+        appendDotToDisplayText();
+    }
+
+    public void onSignButtonClicked() {
+        changeSignOfDisplayText();
     }
 }
