@@ -48,7 +48,7 @@ public class CalculatorController {
         }
     }
 
-    private void updateDisplayTextWithNumber(String numberText) {
+    private void updateDisplayNumber(String numberText) {
         String currentDisplayText = displayText.getValue();
         if (numberText == null || currentDisplayText == null) {
             return;
@@ -63,7 +63,7 @@ public class CalculatorController {
         displayText.setValue(currentDisplayText + numberText);
     }
 
-    private void appendDotToDisplayText() {
+    private void appendDotToDisplayNumber() {
         String currentDisplayText = displayText.getValue();
         if (currentDisplayText == null) {
             return;
@@ -74,7 +74,7 @@ public class CalculatorController {
         displayText.setValue(currentDisplayText + ".");
     }
 
-    private void changeSignOfDisplayText() {
+    private void changeSignOfDisplayNumber() {
         String currentDisplayText = displayText.getValue();
         if (currentDisplayText == null) {
             return;
@@ -85,14 +85,14 @@ public class CalculatorController {
     }
 
     public void onNumberButtonClicked(String numberButtonText) {
-        updateDisplayTextWithNumber(numberButtonText);
+        updateDisplayNumber(numberButtonText);
     }
 
     public void onDotButtonClicked() {
-        appendDotToDisplayText();
+        appendDotToDisplayNumber();
     }
 
     public void onSignButtonClicked() {
-        changeSignOfDisplayText();
+        changeSignOfDisplayNumber();
     }
 }
