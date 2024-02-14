@@ -63,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+        for (Button button : operatorButtons) {
+            button.setOnClickListener(v -> {
+                String buttonText = ((Button) v).getText().toString();
+                calculatorController.onOperatorButtonClicked(buttonText);
+            });
+        }
+        allClear.setOnClickListener(v -> calculatorController.onAllClearButtonClicked());
+        equals.setOnClickListener(v -> calculatorController.onEqualsButtonClicked());
         dot.setOnClickListener(v -> calculatorController.onDotButtonClicked());
         sign.setOnClickListener(v -> calculatorController.onSignButtonClicked());
     }

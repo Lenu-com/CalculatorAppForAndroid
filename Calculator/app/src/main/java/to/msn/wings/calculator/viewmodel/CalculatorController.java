@@ -11,6 +11,7 @@ public class CalculatorController {
     }
     private final MutableLiveData<String> displayText = new MutableLiveData<>();
     private Operator selectedOperator = Operator.NONE;
+    private double storedNumber = 0.0;
     private final CalculatorLogic calculatorLogic = new CalculatorLogic();
 
     public CalculatorController() {
@@ -74,6 +75,12 @@ public class CalculatorController {
         displayText.setValue(currentDisplayText + ".");
     }
 
+    private void allClear() {
+        displayText.setValue("0");
+        selectedOperator = Operator.NONE;
+        storedNumber = 0.0;
+    }
+
     private void changeSignOfDisplayNumber() {
         String currentDisplayText = displayText.getValue();
         if (currentDisplayText == null) {
@@ -84,8 +91,33 @@ public class CalculatorController {
         displayText.setValue(formattedNumberText(signChangedNumber));
     }
 
+    public void onAllClearButtonClicked() {
+        allClear();
+    }
+
     public void onNumberButtonClicked(String numberButtonText) {
         updateDisplayNumber(numberButtonText);
+    }
+
+    public void onOperatorButtonClicked(String operatorButtonText) {
+        String currentDisplayText = displayText.getValue();
+        if (currentDisplayText == null) {
+            return;
+        }
+        updateSelectedOperator(operatorButtonText);
+        storedNumber = Double.parseDouble(displayText.getValue());
+        displayText.setValue("0");
+    }
+
+    public void onEqualsButtonClicked() {
+        String currentDisplayText = displayText.getValue();
+        if (currentDisplayText == null) {
+            return;
+        }
+        double currentNumber = Double.parseDouble(currentDisplayText);
+        double result = calculatorLogic.calculate(storedNumber, currentNumber, selectedOperator);
+        displayText.setValue(formattedNumberText(result));
+        selectedOperator = Operator.NONE;
     }
 
     public void onDotButtonClicked() {
