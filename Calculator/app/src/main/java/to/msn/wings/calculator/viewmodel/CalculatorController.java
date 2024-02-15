@@ -75,6 +75,10 @@ public class CalculatorController {
         displayText.setValue(currentDisplayText + ".");
     }
 
+    private void currentNumberClear() {
+        displayText.setValue("0");
+    }
+
     private void allClear() {
         displayText.setValue("0");
         selectedOperator = Operator.NONE;
@@ -91,25 +95,7 @@ public class CalculatorController {
         displayText.setValue(formattedNumberText(signChangedNumber));
     }
 
-    public void onAllClearButtonClicked() {
-        allClear();
-    }
-
-    public void onNumberButtonClicked(String numberButtonText) {
-        updateDisplayNumber(numberButtonText);
-    }
-
-    public void onOperatorButtonClicked(String operatorButtonText) {
-        String currentDisplayText = displayText.getValue();
-        if (currentDisplayText == null) {
-            return;
-        }
-        updateSelectedOperator(operatorButtonText);
-        storedNumber = Double.parseDouble(displayText.getValue());
-        displayText.setValue("0");
-    }
-
-    public void onEqualsButtonClicked() {
+    private void preformCalculationAndUpdateDisplayNumber() {
         String currentDisplayText = displayText.getValue();
         if (currentDisplayText == null) {
             return;
@@ -118,6 +104,35 @@ public class CalculatorController {
         double result = calculatorLogic.calculate(storedNumber, currentNumber, selectedOperator);
         displayText.setValue(formattedNumberText(result));
         selectedOperator = Operator.NONE;
+    }
+
+    public void onAllClearButtonClicked() {
+        allClear();
+    }
+
+    public void onNumberButtonClicked(String numberButtonText) {
+        if (selectedOperator != Operator.NONE) {
+            currentNumberClear();
+        }
+        updateDisplayNumber(numberButtonText);
+    }
+
+    public void onOperatorButtonClicked(String operatorButtonText) {
+        String currentDisplayText = displayText.getValue();
+        if (currentDisplayText == null) {
+            return;
+        }
+        if (selectedOperator != Operator.NONE) {
+            updateSelectedOperator(operatorButtonText);
+            preformCalculationAndUpdateDisplayNumber();
+            return;
+        }
+        updateSelectedOperator(operatorButtonText);
+        storedNumber = Double.parseDouble(displayText.getValue());
+    }
+
+    public void onEqualsButtonClicked() {
+        preformCalculationAndUpdateDisplayNumber();
     }
 
     public void onDotButtonClicked() {
