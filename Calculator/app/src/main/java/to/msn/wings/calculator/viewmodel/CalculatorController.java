@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import to.msn.wings.calculator.model.CalculatorLogic;
 
 public class CalculatorController {
-    enum Operator {
+    public enum Operator {
         ADD, SUB, MUL, DIV, NONE;
 
         public boolean isHighPriority() {
