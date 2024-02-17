@@ -14,6 +14,7 @@ public class CalculatorController {
     private double storedNumber = 0.0;
     private final CalculatorLogic calculatorLogic = new CalculatorLogic();
 
+    
     public CalculatorController() {
         displayText.setValue("0");
     }
@@ -27,7 +28,8 @@ public class CalculatorController {
     }
 
     private void allClear() {
-        displayText.setValue("0");
+        currentNumberClear();
+        storedNumber = 0.0;
         selectedOperator = Operator.NONE;
     }
 
@@ -58,12 +60,13 @@ public class CalculatorController {
         }
     }
 
-    private void preformCalculationAndUpdateDisplayNumber() {
+    private void performCalculationAndUpdateDisplayNumber() {
         String currentDisplayText = displayText.getValue();
         if (currentDisplayText == null) {
             return;
         }
         double currentNumber = Double.parseDouble(currentDisplayText);
+        // TODO: 0割り時の例外処理を実装
         double result = calculatorLogic.calculate(storedNumber, currentNumber, selectedOperator);
         displayText.setValue(formattedNumberText(result));
     }
@@ -104,13 +107,23 @@ public class CalculatorController {
         displayText.setValue(formattedNumberText(signChangedNumber));
     }
 
+    private void performPercentCalculationAndUpdateDisplayNumber() {
+        String currentDisplayText = displayText.getValue();
+        if (currentDisplayText == null) {
+            return;
+        }
+        double currentNumber = Double.parseDouble(currentDisplayText);
+        double result = calculatorLogic.percent(currentNumber);
+        displayText.setValue(formattedNumberText(result));
+    }
+
     public void onNumberButtonClicked(String numberButtonText) {
         updateDisplayNumber(numberButtonText);
     }
 
     public void onOperatorButtonClicked(String operatorButtonText) {
         if (selectedOperator != Operator.NONE) {
-            preformCalculationAndUpdateDisplayNumber();
+            performCalculationAndUpdateDisplayNumber();
         }
         String currentDisplayText = displayText.getValue();
         if (currentDisplayText == null) {
@@ -122,7 +135,7 @@ public class CalculatorController {
     }
 
     public void onEqualsButtonClicked() {
-        preformCalculationAndUpdateDisplayNumber();
+        performCalculationAndUpdateDisplayNumber();
         selectedOperator = Operator.NONE;
     }
 
@@ -136,5 +149,9 @@ public class CalculatorController {
 
     public void onSignButtonClicked() {
         changeSignOfDisplayNumber();
+    }
+
+    public void onPercentButtonClicked() {
+        performPercentCalculationAndUpdateDisplayNumber();
     }
 }
