@@ -69,9 +69,11 @@ public class MainActivity extends AppCompatActivity {
                 calculatorController.onOperatorButtonClicked(buttonText);
             });
         }
-        allClear.setOnClickListener(v -> calculatorController.onAllClearButtonClicked());
+
         equals.setOnClickListener(v -> calculatorController.onEqualsButtonClicked());
+        allClear.setOnClickListener(v -> calculatorController.onAllClearButtonClicked());
         dot.setOnClickListener(v -> calculatorController.onDotButtonClicked());
         sign.setOnClickListener(v -> calculatorController.onSignButtonClicked());
+        percent.setOnClickListener(v -> calculatorController.onPercentButtonClicked());
     }
 }

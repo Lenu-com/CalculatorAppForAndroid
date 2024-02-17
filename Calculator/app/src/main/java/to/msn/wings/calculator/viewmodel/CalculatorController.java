@@ -14,12 +14,23 @@ public class CalculatorController {
     private double storedNumber = 0.0;
     private final CalculatorLogic calculatorLogic = new CalculatorLogic();
 
+    
     public CalculatorController() {
         displayText.setValue("0");
     }
 
     public LiveData<String> getDisplayText() {
         return displayText;
+    }
+
+    private void currentNumberClear() {
+        displayText.setValue("0");
+    }
+
+    private void allClear() {
+        currentNumberClear();
+        storedNumber = 0.0;
+        selectedOperator = Operator.NONE;
     }
 
     private String formattedNumberText(double number) {
@@ -49,6 +60,17 @@ public class CalculatorController {
         }
     }
 
+    private void performCalculationAndUpdateDisplayNumber() {
+        String currentDisplayText = displayText.getValue();
+        if (currentDisplayText == null) {
+            return;
+        }
+        double currentNumber = Double.parseDouble(currentDisplayText);
+        // TODO: 0割り時の例外処理を実装
+        double result = calculatorLogic.calculate(storedNumber, currentNumber, selectedOperator);
+        displayText.setValue(formattedNumberText(result));
+    }
+
     private void updateDisplayNumber(String numberText) {
         String currentDisplayText = displayText.getValue();
         if (numberText == null || currentDisplayText == null) {
@@ -75,12 +97,6 @@ public class CalculatorController {
         displayText.setValue(currentDisplayText + ".");
     }
 
-    private void allClear() {
-        displayText.setValue("0");
-        selectedOperator = Operator.NONE;
-        storedNumber = 0.0;
-    }
-
     private void changeSignOfDisplayNumber() {
         String currentDisplayText = displayText.getValue();
         if (currentDisplayText == null) {
@@ -91,8 +107,14 @@ public class CalculatorController {
         displayText.setValue(formattedNumberText(signChangedNumber));
     }
 
-    public void onAllClearButtonClicked() {
-        allClear();
+    private void performPercentCalculationAndUpdateDisplayNumber() {
+        String currentDisplayText = displayText.getValue();
+        if (currentDisplayText == null) {
+            return;
+        }
+        double currentNumber = Double.parseDouble(currentDisplayText);
+        double result = calculatorLogic.percent(currentNumber);
+        displayText.setValue(formattedNumberText(result));
     }
 
     public void onNumberButtonClicked(String numberButtonText) {
@@ -100,24 +122,25 @@ public class CalculatorController {
     }
 
     public void onOperatorButtonClicked(String operatorButtonText) {
+        if (selectedOperator != Operator.NONE) {
+            performCalculationAndUpdateDisplayNumber();
+        }
         String currentDisplayText = displayText.getValue();
         if (currentDisplayText == null) {
             return;
         }
         updateSelectedOperator(operatorButtonText);
-        storedNumber = Double.parseDouble(displayText.getValue());
-        displayText.setValue("0");
+        storedNumber = Double.parseDouble(currentDisplayText);
+        currentNumberClear();
     }
 
     public void onEqualsButtonClicked() {
-        String currentDisplayText = displayText.getValue();
-        if (currentDisplayText == null) {
-            return;
-        }
-        double currentNumber = Double.parseDouble(currentDisplayText);
-        double result = calculatorLogic.calculate(storedNumber, currentNumber, selectedOperator);
-        displayText.setValue(formattedNumberText(result));
+        performCalculationAndUpdateDisplayNumber();
         selectedOperator = Operator.NONE;
+    }
+
+    public void onAllClearButtonClicked() {
+        allClear();
     }
 
     public void onDotButtonClicked() {
@@ -126,5 +149,9 @@ public class CalculatorController {
 
     public void onSignButtonClicked() {
         changeSignOfDisplayNumber();
+    }
+
+    public void onPercentButtonClicked() {
+        performPercentCalculationAndUpdateDisplayNumber();
     }
 }
